@@ -88,11 +88,24 @@
                          <option>Pegar emprestado (com prazo determinado)</option>
                          </select>
                      </center>
+                     <center>
+                     <br/>
+                     <label>Prazo de retirada</label>
+                     <input type="date" name="retirada" /><br/><br/>
+                     <label>Prazo de entrega</label>
+                     <input type="date" name="entrega" />
+                     </center>
                      <br/>
                      <center><input type="submit" class="btn btn-primary" value="Realizar ação"/></center>
                  </form>
                  <?php
+                    $host = "fdb16.runhosting.com";
+                    $user = "2320610_jgv";
+                    $pwd = "reni1234";
+                    $db = "2320610_jgv";
+                    $conn = new mysqli($host, $user, $pwd, $db);
                     $user = $_SESSION['user'];
+                    $data = $_POST['data'];
                     $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$user'";
                     $sql = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($sql);
@@ -106,10 +119,14 @@
                             if (strlen($nome_livro)) {
                                 if ($acao == "Pegar emprestado (com prazo determinado)") {
                                     $acao = "emprestimo";
-                                    echo "O livro $nome_livro foi $acao para $nome.";
+                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                    $ins = mysqli_query($conn, $ins);
+                                    echo "Inserido no banco de dados";
                                 }else if ($acao == "Doar livro") {
                                     $acao = "doacao";
-                                    echo "O livro $nome_livro foi $acao por $nome.";
+                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                    $ins = mysqli_query($conn, $ins);
+                                    echo "Inserido no banco de dados";  
                                 }
                             }
                         }
