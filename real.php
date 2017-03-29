@@ -1,3 +1,13 @@
+<?php
+    $host = "fdb16.runhosting.com";
+    $user = "2320610_jgv";
+    $pwd = "reni1234";
+    $db = "2320610_jgv";
+    $conn = new mysqli($host, $user, $pwd, $db);
+    session_start();
+?>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -81,16 +91,27 @@
                      <br/>
                      <center><input type="submit" class="btn btn-primary" value="Realizar ação"/></center>
                  </form>
-                 <?php 
-                    $acao = $_POST['acao'];
-                    $nome_livro = ucwords($_POST['nome_livro']);
-                    if (strlen($nome_livro)) {
-                        if ($acao == "Pegar emprestado (com prazo determinado)") {
-                            $acao = "emprestado";
-                            echo "O livro $nome_livro foi $acao para você.";
-                        }else if ($acao == "Doar livro") {
-                            $acao = "doado";
-                            echo "O livro $nome_livro foi $acao por você.";
+                 <?php
+                    $user = $_SESSION['user'];
+                    $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$user'";
+                    $sql = mysqli_query($conn, $sql);
+                    $row = mysqli_num_rows($sql);
+                    if ($row > 0) {
+                        while ($linha = mysqli_fetch_array($sql)) {
+                            $nome = $linha['nome_aluno'];
+                            $email = $linha['email_aluno'];
+                            $ra = $linha['ra_aluno'];
+                            $acao = $_POST['acao'];
+                            $nome_livro = ucwords($_POST['nome_livro']);
+                            if (strlen($nome_livro)) {
+                                if ($acao == "Pegar emprestado (com prazo determinado)") {
+                                    $acao = "emprestimo";
+                                    echo "O livro $nome_livro foi $acao para $nome.";
+                                }else if ($acao == "Doar livro") {
+                                    $acao = "doacao";
+                                    echo "O livro $nome_livro foi $acao por $nome.";
+                                }
+                            }
                         }
                     }
                   ?>
