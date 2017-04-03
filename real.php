@@ -116,18 +116,29 @@
                             $ra = $linha['ra_aluno'];
                             $acao = $_POST['acao'];
                             $nome_livro = ucwords($_POST['nome_livro']);
-                            if (strlen($nome_livro)) {
-                                if ($acao == "Pegar emprestado (com prazo determinado)") {
-                                    $acao = "emprestimo";
-                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
-                                    $ins = mysqli_query($conn, $ins);
-                                    echo "Inserido no banco de dados";
-                                }else if ($acao == "Doar livro") {
-                                    $acao = "doacao";
-                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
-                                    $ins = mysqli_query($conn, $ins);
-                                    echo "Inserido no banco de dados";  
+                            if (isset($nome_livro)) {
+                                if (strlen($nome_livro > 1)) {
+                                    if ($acao == "Pegar emprestado (com prazo determinado)") {
+                                        $acao = "emprestimo";
+                                        $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                        $ins = mysqli_query($conn, $ins);
+                                        echo "<div class='alert alert-success'>";
+                                        echo "<h3>Livro que será emprestado: $nome_livro</h3>";
+                                        echo "</div>";
+                                    }else if ($acao == "Doar livro") {
+                                        $acao = "doacao";
+                                        $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                        $ins = mysqli_query($conn, $ins);
+                                        echo "<div class='alert alert-success'>";
+                                        echo "<h3>Livro que será doado: $nome_livro</h3>";
+                                        echo "</div>";
+                                    }
                                 }
+                            }else {
+                                echo "<br/>";
+                                echo "<div class='alert alert-danger'>";
+                                echo "<h3>Ação não pôde ser realizada. Digite o nome do livro.</h3>";
+                                echo "</div>";
                             }
                         }
                     }
