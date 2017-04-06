@@ -119,7 +119,6 @@
                     $y = $today['year'];
                     $today = "$y-$m-$d";
                     echo $today;
-                    echo "$data";
                     if ($row > 0) {
                         while ($linha = mysqli_fetch_array($sql)) {
                             $nome = $linha['nome_aluno'];
@@ -167,7 +166,7 @@
                  <center>
             <div>
                       <div>
-                          <a href="#" >
+                          <a href="consult.php" >
                               <center><i class="fa fa-book fa-5x"></i></center>
                       <h4>Consultar todos os livros emprestados por ora</h4>
                       </a>
