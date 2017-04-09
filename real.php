@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // DB
 $host = "fdb16.runhosting.com";
 $user = "2320610_jgv";
@@ -7,6 +8,14 @@ $db = "2320610_jgv";
 $conn = new mysqli($host, $user, $pwd, $db);
 session_start();
 $user = $_SESSION['user'];
+=======
+    $host = "fdb16.runhosting.com";
+    $user = "2320610_jgv";
+    $pwd = "reni1234";
+    $db = "2320610_jgv";
+    $conn = new mysqli($host, $user, $pwd, $db);
+    session_start();
+>>>>>>> 57257839592826533fd0180dfd638a04e01aafb4
 ?>
 
 
@@ -91,6 +100,7 @@ $user = $_SESSION['user'];
                          </select>
                      </center>
                      <center>
+<<<<<<< HEAD
                         <?php 
                             $today = getdate();
                             $d = $today['mday'];
@@ -106,11 +116,17 @@ $user = $_SESSION['user'];
                             $dia_min = "$y-$m-$d";
                             echo "<input type='date' name='data' min='$dia_min'><br/>";
                         ?>
+=======
+                     <br/>
+                     <label>Prazo da ação</label>
+                     <input type="date" name="data"/>
+>>>>>>> 57257839592826533fd0180dfd638a04e01aafb4
                      </center>
                      <br/>
                      <center><input type="submit" class="btn btn-primary" value="Realizar ação"/></center>
                  </form>
                  <?php
+<<<<<<< HEAD
                     function enviar_email() {
                         $host = "fdb16.runhosting.com";
                         $user = "2320610_jgv";
@@ -172,6 +188,70 @@ $user = $_SESSION['user'];
                         }else if ($acao == "Doar livro") {
                             $acao = "doacao";
                             inserir_db($nome_livro, $acao);
+=======
+                    $host = "fdb16.runhosting.com";
+                    $user = "2320610_jgv";
+                    $pwd = "reni1234";
+                    $db = "2320610_jgv";
+                    $conn = new mysqli($host, $user, $pwd, $db);
+                    $user = $_SESSION['user'];
+                    $data = $_POST['data'];
+                    $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$user'";
+                    $sql = mysqli_query($conn, $sql);
+                    $row = mysqli_num_rows($sql);
+                    $today = getdate();
+                    $d = $today['mday'];
+                    if (strlen($d) == 1) {
+                        $d = '0'.$d;
+                    }
+                    $m = $today['mon'];
+                    if (strlen($m) == 1) {
+                        $m = '0'.$m;
+                    }
+                    $y = $today['year'];
+                    $today = "$y-$m-$d";
+                    echo $today;
+                    if ($row > 0) {
+                        while ($linha = mysqli_fetch_array($sql)) {
+                            $nome = $linha['nome_aluno'];
+                            $email = $linha['email_aluno'];
+                            $ra = $linha['ra_aluno'];
+                            $acao = $_POST['acao'];
+                            $nome_livro = ucwords($_POST['nome_livro']);
+                            if (strlen($nome_livro) > 1) {
+                                if ($acao == "Pegar emprestado (com prazo determinado)") {
+                                    $acao = "emprestimo";
+                                    if ($data == $today) {
+                                        echo "<br/>";
+                                        echo "<div class='alert alert-warning'>";
+                                        echo "<h3>Data incorreta</h3>";
+                                        echo "</div>";
+                                        exit();
+                                    }
+                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                    $ins = mysqli_query($conn, $ins);
+                                    echo "<br/>";
+                                    echo "<div class='alert alert-info'>";
+                                    echo "<h3>Livro que será emprestado: $nome_livro</h3>";
+                                    echo "</div>";
+                                }else if ($acao == "Doar livro") {
+                                    $acao = "doacao";
+                                    if ($data == $today) {
+                                        echo "<br/>";
+                                        echo "<div class='alert alert-warning'>";
+                                        echo "<h3>Data incorreta</h3>";
+                                        echo "</div>";
+                                        exit();
+                                    }
+                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                    $ins = mysqli_query($conn, $ins);
+                                    echo "<br/>";
+                                    echo "<div class='alert alert-info'>";
+                                    echo "<h3>Livro que será doado: $nome_livro</h3>";
+                                    echo "</div>";
+                                }
+                            }
+>>>>>>> 57257839592826533fd0180dfd638a04e01aafb4
                         }
                     }
                   ?>
@@ -179,7 +259,7 @@ $user = $_SESSION['user'];
                  <center>
             <div>
                       <div>
-                          <a href="#" >
+                          <a href="consult.php" >
                               <center><i class="fa fa-book fa-5x"></i></center>
                       <h4>Consultar todos os livros emprestados por ora</h4>
                       </a>
