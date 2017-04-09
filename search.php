@@ -102,7 +102,7 @@
                             $livro = ucwords($_POST['book-name']);
                             $autor = ucwords($_POST['author-name']);
 
-                            $sql = "SELECT * FROM livros WHERE nome_livro LIKE '% $livro %' OR autor_livro LIKE '% $autor %'";
+                            $sql = "SELECT * FROM livros WHERE nome_livro LIKE '$livro' OR autor_livro LIKE '$autor'";
                             $sql = mysqli_query($conn, $sql);
                             mysqli_query($conn, "SET NAMES utf8");
                             mysqli_query($conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");

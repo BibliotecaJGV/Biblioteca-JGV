@@ -1,17 +1,19 @@
 ﻿<?php
-session_start();
 $host = "fdb16.runhosting.com";
 $user = "2320610_jgv";
 $pwd = "reni1234";
 $db = "2320610_jgv";
 $conn = new mysqli($host, $user, $pwd, $db);
+// session_start();
+$user = $_SESSION['user'];
 ?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
       <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="refresh" content="60">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Biblioteca JGV</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -68,7 +70,6 @@ $conn = new mysqli($host, $user, $pwd, $db);
                         <a href="real.php"><i class="fa fa-book"></i>Biblioteca física </a>
                     </li>
                     <?php
-                    $user = $_SESSION['user'];
                     $sql = "SELECT * FROM admins WHERE usuario LIKE '$user'";
                     $sql = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($sql);
@@ -87,12 +88,41 @@ $conn = new mysqli($host, $user, $pwd, $db);
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Registrar livros </h2>   
+                     <h2>Registrar livros físicos </h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
                   <hr />
-              
+                  <form action="books_register.php" method="POST">
+                    <input class="form-control" name="nome_livro" placeholder="Nome do livro" /><br/>
+                    <input class="form-control" name="autor_livro" placeholder="Autor do livro" /><br/>
+                    <?php
+                    function clock() {
+                        $today = getdate();
+                        $d = $today['mday'];
+                        if (strlen($d) == 1) {
+                            $d = '0' . $d;
+                        }
+                        $m = $today['mon'];
+                        if (strlen($m) == 1) {
+                            $m = '0' . $m;
+                        }
+                        $y = $today['year'];
+                        $hj ="$d-$m-$y";
+                        $hour  = date('H');
+                        $minutes = date('i');
+                        $hour = intval($hour);
+                        $hour -= 3;
+                        $hour = "$hour:$minutes";
+                        echo "<center>";
+                        echo "<label>Horário atual: $hour</label> - ";
+                        echo "<label>Hoje é: $hj</label><br/>";
+                        echo "</center>";
+                    }
+                    clock();
+                    ?>
+                    <center><input type="submit" value="Registrar livro" class="btn btn-primary" /></center><br/>
+                  </form>
                  <!-- /. ROW  -->           
     </div>
              <!-- /. PAGE INNER  -->

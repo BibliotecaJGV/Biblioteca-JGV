@@ -1,3 +1,15 @@
+<?php
+// DB
+$host = "fdb16.runhosting.com";
+$user = "2320610_jgv";
+$pwd = "reni1234";
+$db = "2320610_jgv";
+$conn = new mysqli($host, $user, $pwd, $db);
+session_start();
+$user = $_SESSION['user'];
+?>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -78,19 +90,88 @@
                          <option>Pegar emprestado (com prazo determinado)</option>
                          </select>
                      </center>
+                     <center>
+                        <?php 
+                            $today = getdate();
+                            $d = $today['mday'];
+                            $m = $today['mon'];
+                            $y = $today['year'];
+                            $dia_atual = "$y-$m-$d";
+                            $dia_da_semana = date('N', strtotime($dia_atual));
+                            if ($dia_da_semana == 6) {
+                                $d += 2;
+                            }else if ($dia_da_semana == 7){
+                                $d += 1;
+                            }
+                            $dia_min = "$y-$m-$d";
+                            echo "<input type='date' name='data' min='$dia_min'><br/>";
+                        ?>
+                     </center>
                      <br/>
                      <center><input type="submit" class="btn btn-primary" value="Realizar ação"/></center>
                  </form>
-                 <?php 
+                 <?php
+                    function enviar_email() {
+                        $host = "fdb16.runhosting.com";
+                        $user = "2320610_jgv";
+                        $pwd = "reni1234";
+                        $db = "2320610_jgv";
+                        $conn = new mysqli($host, $user, $pwd, $db);
+                        $ra = $_SESSION['user'];
+                        echo 'RA:'.$ra;
+                        $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
+                        $sql = mysqli_query($conn, $sql);
+                        $row = mysqli_num_rows($sql);
+                        if ($row > 0) {
+                            while ($linha = mysqli_fetch_array($sql)) {
+                                    $email = $linha['email_aluno'];
+                                }
+                        }
+                        echo $email;
+                        $nome_livro = $_POST['nome_livro'];
+                        $para = $email;
+                        $data = $_POST['data'];
+                        $acao = $_POST['acao'];
+                        $sujeito = ucwords($acao);
+                        $mensagem = "Você acabou de solicitar a(o) $acao de um livro chamado $nome_livro para o dia $data. Aguarderemos você lá em.";
+                        $cabecalho = "From:reni.alkimim@gmail.com \r\n";
+                        $cabecalho .= "Cc:reni.alkimim@gmail.com \r\n";
+                        $cabecalho .= "MIME-Version: 1.0\r\n";
+                        $cabecalho .= "Content-type: text/html\r\n";
+                        mail($para, $sujeito, $mensagem, $cabecalho);
+                        echo "<br/>enviado email";
+                    }
+                    function inserir_db($nome_livro, $acao) {
+                        $host = "fdb16.runhosting.com";
+                        $user = "2320610_jgv";
+                        $pwd = "reni1234";
+                        $db = "2320610_jgv";
+                        $conn = new mysqli($host, $user, $pwd, $db);
+                        $user = $_SESSION['user'];
+                        $data = $_POST['data'];
+                        echo $user;
+                        echo "<br/>";
+                        echo $nome_livro;
+                        echo "<br/>";
+                        echo $acao;
+                        echo "<br/>";
+                        echo $data;
+                        echo "<br/>";
+                        if (strlen($nome_livro) > 1 and strlen($user) and strlen($data) > 1 and strlen($acao) > 1) {
+                            $sql = mysqli_query($conn, "INSERT INTO registros(nome_livro, pessoa, data, acao) VALUES('$nome_livro', '$user', '$data', '$acao')");
+                            enviar_email();
+                        }
+                    }
+
                     $acao = $_POST['acao'];
                     $nome_livro = ucwords($_POST['nome_livro']);
                     if (strlen($nome_livro)) {
                         if ($acao == "Pegar emprestado (com prazo determinado)") {
-                            $acao = "emprestado";
-                            echo "O livro $nome_livro foi $acao para você.";
+                            $acao = "requerimento";
+                            inserir_db($nome_livro, $acao);
                         }else if ($acao == "Doar livro") {
-                            $acao = "doado";
-                            echo "O livro $nome_livro foi $acao por você.";
+                            $acao = "doacao";
+                            inserir_db($nome_livro, $acao);
                         }
                     }
                   ?>
