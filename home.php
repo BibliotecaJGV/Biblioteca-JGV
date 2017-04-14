@@ -115,6 +115,11 @@ $nome = $sql->nome_aluno;
                   <hr />
                 <div class="row">
                     <div class="col-lg-12 ">
+                        <label>Recomendação da semana</label>
+                        <div class="alert alert-warning">
+                        <strong> As últimas notícias sobre educação, Enem, bolsa de estudo, ProUni, Sisu, Fuvest, Ciências sem Fronteiras, CAPES, CNPq, vestibular, carreira, currículo e mais.</strong>
+                        <a href="http://www.universia.com.br/">Universia Brasil</a>
+                        </div>
                         <div class="alert alert-info">
                              <?php
                              $host = "fdb16.runhosting.com";
@@ -127,11 +132,10 @@ $nome = $sql->nome_aluno;
                              $sql = mysqli_query($conn, "SELECT * FROM alunos WHERE ra_aluno = '$ra' AND senha = '$pass'");
                              $sql = mysqli_fetch_object($sql);
                              $nome = $sql->nome_aluno;
-                             echo "<strong>Bem vindo(a), $nome</strong>.";
+                             echo "Bem vindo(a), <strong>$nome</strong>.";
                              ?>
                              <!-- <strong>Welcome Jhon Doe ! </strong> You Have No pending Task For Today. > -->
                         </div>
-
                     </div>
                     </div>
                   <!-- /. ROW  -->
