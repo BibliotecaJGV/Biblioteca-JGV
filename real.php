@@ -118,7 +118,6 @@
                     }
                     $y = $today['year'];
                     $today = "$y-$m-$d";
-                    echo $today;
                     if ($row > 0) {
                         while ($linha = mysqli_fetch_array($sql)) {
                             $nome = $linha['nome_aluno'];
