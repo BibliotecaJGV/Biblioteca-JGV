@@ -41,7 +41,7 @@
       body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;
+  background: url("http://cdn.wallpapersafari.com/32/30/IuGnQc.jpg") 50% fixed;
   /* background: url(css/bg.jpg); */
   background-size: cover;
 }

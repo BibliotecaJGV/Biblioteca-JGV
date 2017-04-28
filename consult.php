@@ -75,9 +75,10 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
-            <h4>Biblioteca física - Consulta</h4>
+            <h2>Biblioteca física - Consulta</h2>
                  <hr/>
                     <?php 
+                        if ($row > 0) { 
                             $sql = "SELECT * FROM registros";
                             $sql = mysqli_query($conn, $sql);
                             $row = mysqli_num_rows($sql);
@@ -90,7 +91,6 @@
                             echo  "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
-                        if ($row > 0) { 
                             while ($linha = mysqli_fetch_array($sql)) {
                                 $nome_livro = $linha['nome_livro'];
                                 $nome = $linha['nome_aluno'];
@@ -105,13 +105,13 @@
                             }
                         }else {
                             echo "<div class='alert alert-error'>";
-                            echo "<h3><strong>Os livros</strong> não foram achados, desculpe-nos.</h3>";
+                            echo "<h3><strong>Os registros</strong> não foram achados, desculpe-nos.</h3>";
                             echo "</div>";
                         }
                         echo "</tbody>";
                         echo "</table>";
+                        echo "<hr/>";
                         ?>
-                 <hr/>
                  <center>
             <div>
               

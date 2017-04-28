@@ -75,23 +75,29 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
-            <h4>Biblioteca física</h4>
+            <h2>Biblioteca física</h2>
                  <hr/>
                  <form action="real.php" method="POST">
+                    <center>
+                    <div style="width:30%">
                      <input class="form-control" name="nome_livro" placeholder="Nome do livro"/>
+                     </div>
+                     </center>
                      <center><label>Ação a se fazer</label></center>
-                        <br/>
                      <center>
-                     <select name="acao">
+                     <div style="width:30%">
+                     <select name="acao" class="form-control">
                          <option>Selecione uma opção...</option>
                          <option>Doar livro</option>
                          <option>Pegar emprestado (com prazo determinado)</option>
                          </select>
+                      </div>
                      </center>
                      <center>
-                     <br/>
+                     <div style="width:30%">
                      <label>Prazo da ação</label>
-                     <input type="date" name="data"/>
+                     <input type="date" name="data" class="form-control"/>
+                     </div>
                      </center>
                      <br/>
                      <center><input type="submit" class="btn btn-primary" value="Realizar ação"/></center>
