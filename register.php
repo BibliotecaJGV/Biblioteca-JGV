@@ -3,6 +3,8 @@
     $name = ucwords(strtolower($_POST['name']));
     $email = $_POST['email'];
     $pass = $_POST['pass'];
+    $inst = $_POST['inst'];
+    $inst = strtolower($inst);
 
     $host = "fdb16.runhosting.com";
     $user = "2320610_jgv";
@@ -13,8 +15,10 @@
     mysqli_query($conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
     if (isset($ra)) {
      if (strlen($name) > 1 and strlen($ra) > 1 and str_getcsv($pass) > 1) {
-       $sql = mysqli_query($conn, "INSERT INTO alunos(ra_aluno, nome_aluno, email_aluno, senha) VALUES('$ra', '$name', '$email', '$pass')");
-       header("Location:index.php");   
+      if ($inst == "jgv" or strpos($inst, "josé geraldo vieira") or strrpos($inst, "jose geraldo vieira") or $inst == "geraldo") {
+        $sql = mysqli_query($conn, "INSERT INTO alunos(ra_aluno, nome_aluno, email_aluno, senha) VALUES('$ra', '$name', '$email', '$pass')");
+        header("Location:index.php");   
+      }
     }else {
         header("Location:register.php?t=invalid");
         }   
@@ -208,6 +212,8 @@ footer a, footer a:link {
     <i class="fa fa-user"></i>
     <input type="text" name="user" placeholder="RA do aluno" autofocus/>
     <i class="fa fa-user"></i>
+    <input type="text" name="inst" placeholder="Instituição de ensino" autofocus/>
+    <i class="fa fa-user"></i>
     <input type="text" name="email" placeholder="Email do aluno" autofocus/>
     <i class="fa fa-envelope-square"></i>
     <input type="password" name="pass" placeholder="Senha" />
@@ -218,12 +224,15 @@ footer a, footer a:link {
         echo "<center><h4>Há campos que não foram preenchidos.</h4></center>";
     }
     ?>
+    <?php
+    echo "<center><h6>Lembre-se de colocar os 0's (zeros) na frente. Bote o dígito ao final do RA.</h6></center>"
+    ?>
     <button>
       <i class="spinner"></i>
       <span class="state">Registrar</span>
     </button>
   </form>
-  <footer>José Geraldo Vieira</footer>
+  <footer><a href="index.php">Entrar</a> <br/><br/> José Geraldo Vieira</footer>
   </p>
 </div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
