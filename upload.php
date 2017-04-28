@@ -115,7 +115,7 @@ if (isset($_FILES['arquivo'])) {
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Envio de livros </h2>   
+                     <h3>Envio de livros </h3>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
@@ -164,7 +164,7 @@ if (isset($_FILES['arquivo'])) {
     
              <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2017 José Geraldo Vieira | Design by: <a href="http://www.facebook.com/pbasichacker" style="color:#fff;"  target="_blank">Reni A. Dantas</a>
+                    &copy;  2017 José Geraldo Vieira
                 </div>
         </div>
         </div>

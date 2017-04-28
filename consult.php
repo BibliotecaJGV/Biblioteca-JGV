@@ -75,7 +75,7 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
-            <h2>Biblioteca física - Consulta</h2>
+            <h3>Biblioteca física - Consulta</h3>
                  <hr/>
                     <?php 
                         if ($row > 0) { 

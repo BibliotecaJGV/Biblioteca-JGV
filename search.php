@@ -82,7 +82,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Pesquisa por livro </h2>
+                     <h3>Pesquisa por livro </h3>
                     </div>
                 </div>
                  <!-- /. ROW  -->
@@ -111,7 +111,7 @@
                             $pasta = dirname(getcwd()).'/uploads/';
 
                             if ((strlen($livro) > 1) or (strlen($autor))) {
-                                echo "<h3>Livro encontrado</h3>";
+                                echo "<h4>Livro encontrado</h4>";
                                 echo '<table class="table table-striped table-bordered table-hover">';
                                 echo "<tr>";
                                 echo  "<th>Nome do livro </th>";
@@ -135,9 +135,9 @@
                             }else {
                                 echo "<div class='alert alert-error'>";
                                 if (strlen($livro) > 1)
-                                  echo "<h3><strong>$livro</strong> não foi achado, desculpe-nos.</h3>";
+                                  echo "<h4><strong>$livro</strong> não foi achado, desculpe-nos.</h4>";
                                 else {
-                                  echo "<h3>O autor <strong>$autor</strong> não foi achado, desculpe-nos.</h3>";
+                                  echo "<h4>O autor <strong>$autor</strong> não foi achado, desculpe-nos.</h4>";
                                 }
                                 echo "</div>";
                             }
@@ -158,7 +158,7 @@
 
              <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2017 José Geraldo Vieira | Design by: <a href="http://www.facebook.com/pbasichacker" style="color:#fff;"  target="_blank">Reni A. Dantas</a>
+                    &copy;  2017 José Geraldo Vieira
                 </div>
         </div>
         </div>

@@ -83,7 +83,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Configurações </h2>
+                     <h3>Configurações </h3>
                     </div>
                 </div>
                  <!-- /. ROW  -->
@@ -225,7 +225,7 @@
 
              <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2017 José Geraldo Vieira | Desenvolvido por: <a href="http://facebook.com/pbasichacker" style="color:#fff;"  target="_blank">Reni A. Dantas</a>
+                    &copy;  2017 José Geraldo Vieira
                 </div>
         </div>
         </div>

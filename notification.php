@@ -83,7 +83,7 @@
                     </div>
                 </div>
                  <!-- /. ROW  -->
-                 <h5>Notificações de livros partilhados</h5>
+                 <h3>Notificações de livros partilhados</h3>
                   <hr />
                         <?php
                         $hour = date('H');
@@ -141,7 +141,7 @@
 
              <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2014 José Geraldo Vieira | Desenvolvido por: <a href="http://facebook.com/pbasichacker" style="color:#fff;"  target="_blank">Reni A. Dantas</a>
+                    &copy;  2014 José Geraldo Vieira
                 </div>
         </div>
         </div>

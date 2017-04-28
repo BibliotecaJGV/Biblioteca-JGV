@@ -88,7 +88,7 @@ $user = $_SESSION['user'];
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Registrar livros físicos </h2>   
+                     <h3>Registrar livros físicos </h3>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->

@@ -75,7 +75,7 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
-            <h2>Biblioteca física</h2>
+            <h3>Biblioteca física</h3>
                  <hr/>
                  <form action="real.php" method="POST">
                     <center>

@@ -82,12 +82,12 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Listar todos os livros </h2>   
+                     <h3>Listar todos os livros </h3>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
                   <hr />
-                  <h3>Todos os livros disponíveis na database atual</h3>
+                  <h4>Todos os livros disponíveis na database atual</h4>
                   <hr>
                       <?php 
                             $livro = ucwords($_POST['book-name']);
@@ -100,7 +100,7 @@
 
                             $pasta = dirname(getcwd()).'/uploads/';
 
-                                echo "<h3>Livros encontrados</h3>";
+                                echo "<h4>Livros encontrados</h4>";
                                 echo '<table class="table table-striped table-bordered table-hover">';
                                 echo  "<th>Nome do livro </th>";
                                 echo  "<th> Autor(a) do livro</th>";
@@ -141,7 +141,7 @@
     
              <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2017 José Geraldo Vieira | Design by: <a href="http://www.facebook.com/pbasichacker" style="color:#fff;"  target="_blank">Reni A. Dantas</a>
+                    &copy;  2017 José Geraldo Vieira
                 </div>
         </div>
         </div>

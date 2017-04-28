@@ -108,7 +108,7 @@ $nome = $sql->nome_aluno;
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>Painel principal do aluno</h2>
+                     <h3>Painel principal do aluno</h3>
                     </div>
                 </div>
                  <!-- /. ROW  -->
