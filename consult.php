@@ -5,6 +5,9 @@
     $db = "2320610_jgv";
     $conn = new mysqli($host, $user, $pwd, $db);
     session_start();
+	if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
+		header("Location:login.php");
+	}
 ?>
 
 

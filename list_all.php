@@ -1,16 +1,17 @@
-﻿<?php 
+<?php
   $host = "fdb16.runhosting.com";
   $user = "2320610_jgv";
   $pwd = "reni1234";
   $db = "2320610_jgv";
   $conn = new mysqli($host, $user, $pwd, $db);
+  session_start();
+  if (!isset($_SESSION['user']) || (!isset($_SESSION['pass']))) {
+      header("Location:login.php");
+  }
   $msg = false;
   mysqli_query($conn, "SET NAMES utf8");
   mysqli_query($conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

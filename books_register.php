@@ -1,10 +1,13 @@
-﻿<?php
+Warning: Cannot modify header information - headers already sent by (output started at /srv/disk3/2320610/www/bibliotecajgv.atwebpages.com/list_all.php:1) in <?php
 $host = "fdb16.runhosting.com";
 $user = "2320610_jgv";
 $pwd = "reni1234";
 $db = "2320610_jgv";
 $conn = new mysqli($host, $user, $pwd, $db);
-// session_start();
+session_start();
+if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
+	header("Location:login.php");
+}
 $user = $_SESSION['user'];
 ?>
 
