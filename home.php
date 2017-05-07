@@ -58,8 +58,20 @@ $nome = $sql->nome_aluno;
                     </a>
 
                 </div>
-
                 <span class="logout-spn" >
+                <?php 
+                $ra = $_SESSION['user'];
+                $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
+                $sql = mysqli_query($conn, $sql);
+                $row = mysqli_num_rows($sql);
+                if ($row > 0) {
+                    while ($linha = mysqli_fetch_array($sql)) {
+                        $email = $linha['email_aluno'];
+                        $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=32";
+                        echo "<a href='settings.php'><img src='$grav_url'/><a/>";
+                    }
+                }
+                ?>
                   <a href="index.php" style="color:#fff;">SAIR</a>
 
                 </span>
@@ -117,8 +129,8 @@ $nome = $sql->nome_aluno;
                     <div class="col-lg-12 ">
                         <label>Recomendação da semana</label>
                         <div class="alert alert-warning">
-                        <strong> As últimas notícias sobre educação, Enem, bolsa de estudo, ProUni, Sisu, Fuvest, Ciências sem Fronteiras, CAPES, CNPq, vestibular, carreira, currículo e mais.</strong>
-                        <a href="http://www.universia.com.br/">Universia Brasil</a>
+                        Conteúdos do ENEM 2017.
+                        <strong><a href="http://enem2017.biz/conteudo-do-enem-2017/">ENEM 2017</a></strong>
                         </div>
                         <div class="alert alert-info">
                              <?php

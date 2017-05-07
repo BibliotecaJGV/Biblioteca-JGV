@@ -46,6 +46,19 @@ $user = $_SESSION['user'];
                 </div>
               
                  <span class="logout-spn" >
+                      <?php 
+                $ra = $_SESSION['user'];
+                $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
+                $sql = mysqli_query($conn, $sql);
+                $row = mysqli_num_rows($sql);
+                if ($row > 0) {
+                    while ($linha = mysqli_fetch_array($sql)) {
+                        $email = $linha['email_aluno'];
+                        $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=32";
+                        echo "<a href='settings.php'><img src='$grav_url'/><a/>";
+                    }
+                }
+                ?>
                   <a href="index.php" style="color:#fff;">SAIR</a>  
 
                 </span>
