@@ -28,8 +28,10 @@
   <meta charset="UTF-8">
   <title>Biblioteca JGV</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/normalize.min.css">
+  <link rel="shortcut icon" type="image/ico" icon"favicon.ico">
 
   
       <style>
@@ -37,7 +39,7 @@
       body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("http://cdn.wallpapersafari.com/32/30/IuGnQc.jpg") 50% fixed;
+  background: "css/bg.jpg" 50% fixed;
   /* background: url(css/bg.jpg); */
   background-size: cover;
 }
@@ -196,7 +198,7 @@ footer a, footer a:link {
 
     </style>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script> -->
 
 </head>
 
