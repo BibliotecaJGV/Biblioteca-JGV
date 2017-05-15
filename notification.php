@@ -48,7 +48,7 @@
                 </div>
 
                  <span class="logout-spn" >
-                      <?php 
+                      <?php
                 $ra = $_SESSION['user'];
                 $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
                 $sql = mysqli_query($conn, $sql);
@@ -61,7 +61,7 @@
                     }
                 }
                 ?>
-                  <a href="index.php" style="color:#fff;">SAIR</a>  
+                  <a href="index.php" style="color:#fff;">SAIR</a>
 
                 </span>
             </div>
@@ -158,7 +158,7 @@
 
              <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2014 José Geraldo Vieira
+                    &copy;  2017 José Geraldo Vieira
                 </div>
         </div>
         </div>
