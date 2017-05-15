@@ -1,4 +1,4 @@
-<?php 
+<?php
     $ra = $_POST['user'];
     $name = ucwords(strtolower($_POST['name']));
     $email = $_POST['email'];
@@ -14,10 +14,10 @@
     if (isset($ra)) {
      if (strlen($name) > 1 and strlen($ra) > 1 and str_getcsv($pass) > 1) {
        $sql = mysqli_query($conn, "INSERT INTO alunos(ra_aluno, nome_aluno, email_aluno, senha) VALUES('$ra', '$name', '$email', '$pass')");
-       header("Location:index.php");   
+       header("Location:index.php");
     }else {
         header("Location:register.php?t=invalid");
-        }   
+        }
     }
 ?>
 
@@ -29,11 +29,13 @@
   <title>Biblioteca JGV</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+   <!-- FONTAWESOME STYLES-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/normalize.min.css">
   <link rel="shortcut icon" type="image/ico" icon"favicon.ico">
 
-  
+
       <style>
       /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
       body {

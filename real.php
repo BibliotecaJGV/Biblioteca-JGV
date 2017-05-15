@@ -27,9 +27,9 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-     
-           
-          
+
+
+
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -43,9 +43,9 @@
                         <img src="assets/img/Book-icon.png" />
                     </a>
                 </div>
-              
+
                  <span class="logout-spn" >
-                      <?php 
+                      <?php
                 $ra = $_SESSION['user'];
                 $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
                 $sql = mysqli_query($conn, $sql);
@@ -58,7 +58,7 @@
                     }
                 }
                 ?>
-                  <a href="index.php" style="color:#fff;">SAIR</a>  
+                  <a href="index.php" style="color:#fff;">SAIR</a>
 
                 </span>
             </div>
@@ -67,7 +67,7 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                 
+
 
                     <li>
                         <a href="home.php" ><i class="fa fa-desktop "></i>Principal </a>
@@ -129,16 +129,22 @@
                     $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$user'";
                     $sql = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($sql);
+                    $hour = date('H');
+                    date_default_timezone_set('UTC');
+                    setlocale(LC_ALL, 'pt_BR');
                     $today = getdate();
                     $d = $today['mday'];
-                    if (strlen($d) == 1) {
-                        $d = '0'.$d;
+                    if (strlen($d) < 2) {
+                      $d = '0' . $d;
                     }
                     $m = $today['mon'];
-                    if (strlen($m) == 1) {
-                        $m = '0'.$m;
+                    if (strlen($m) < 2) {
+                      $m = '0' . $m;
                     }
                     $y = $today['year'];
+                    if ($hour >= 0 and $hour < 3) {
+                        $d -= 1;
+                    }
                     $today = "$y-$m-$d";
                     if ($row > 0) {
                         while ($linha = mysqli_fetch_array($sql)) {
@@ -149,22 +155,23 @@
                             $nome_livro = ucwords($_POST['nome_livro']);
                             if (strlen($nome_livro) > 1) {
                                 if ($acao == "Pegar emprestado (com prazo determinado)") {
-                                    $acao = "emprestimo";
+                                    $acao = "Empréstimo";
                                     if ($data == $today) {
                                         echo "<br/>";
                                         echo "<div class='alert alert-warning'>";
                                         echo "<h3>Data incorreta</h3>";
                                         echo "</div>";
                                         exit();
+                                    }else {
+                                      $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                      $ins = mysqli_query($conn, $ins);
+                                      echo "<br/>";
+                                      echo "<div class='alert alert-info'>";
+                                      echo "<h3>Livro que será emprestado: $nome_livro</h3>";
+                                      echo "</div>";
                                     }
-                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
-                                    $ins = mysqli_query($conn, $ins);
-                                    echo "<br/>";
-                                    echo "<div class='alert alert-info'>";
-                                    echo "<h3>Livro que será emprestado: $nome_livro</h3>";
-                                    echo "</div>";
                                 }else if ($acao == "Doar livro") {
-                                    $acao = "doacao";
+                                    $acao = "Doação";
                                     if ($data == $today) {
                                         echo "<br/>";
                                         echo "<div class='alert alert-warning'>";
@@ -172,12 +179,14 @@
                                         echo "</div>";
                                         exit();
                                     }
-                                    $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
-                                    $ins = mysqli_query($conn, $ins);
-                                    echo "<br/>";
-                                    echo "<div class='alert alert-info'>";
-                                    echo "<h3>Livro que será doado: $nome_livro</h3>";
-                                    echo "</div>";
+                                    else {
+                                      $ins = "INSERT INTO registros(nome_livro, ra_aluno, nome_aluno, data, acao) VALUES('$nome_livro', '$ra', '$nome', '$data', '$acao')";
+                                      $ins = mysqli_query($conn, $ins);
+                                      echo "<br/>";
+                                      echo "<div class='alert alert-info'>";
+                                      echo "<h3>Livro que será doado: $nome_livro</h3>";
+                                      echo "</div>";
+                                    }
                                 }
                             }
                         }
@@ -193,23 +202,23 @@
                       </a>
                       </div>
             </div></center>
-              
-                 <!-- /. ROW  -->           
+
+                 <!-- /. ROW  -->
     </div>
              <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
     <div class="footer">
-      
-    
+
+
              <div class="row">
                 <div class="col-lg-12" >
                     &copy; 2017 José Geraldo Vieira
                 </div>
         </div>
         </div>
-          
+
 
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -219,7 +228,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-    
-   
+
+
 </body>
 </html>

@@ -5,9 +5,16 @@
     $db = "2320610_jgv";
     $conn = new mysqli($host, $user, $pwd, $db);
     session_start();
-	if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
-		header("Location:login.php");
-	}
+  	if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
+  		header("Location:login.php");
+  	}
+    $user = $_SESSION['user'];
+    $sql = "SELECT * FROM admins WHERE usuario LIKE '$user'";
+    $sql = mysqli_query($conn, $sql);
+    $row = mysqli_num_rows($sql);
+    if ($row > 0) {
+        $admin = true;
+    }
 ?>
 
 
@@ -27,9 +34,9 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-     
-           
-          
+
+
+
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
@@ -43,9 +50,9 @@
                         <img src="assets/img/Book-icon.png" />
                     </a>
                 </div>
-              
+
                  <span class="logout-spn" >
-                      <?php 
+                      <?php
                 $ra = $_SESSION['user'];
                 $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
                 $sql = mysqli_query($conn, $sql);
@@ -58,7 +65,7 @@
                     }
                 }
                 ?>
-                  <a href="index.php" style="color:#fff;">SAIR</a>  
+                  <a href="index.php" style="color:#fff;">SAIR</a>
 
                 </span>
             </div>
@@ -67,7 +74,7 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                 
+
 
                     <li>
                         <a href="home.php" ><i class="fa fa-desktop "></i>Principal </a>
@@ -93,8 +100,8 @@
             <div id="page-inner">
             <h3>Biblioteca física - Consulta</h3>
                  <hr/>
-                    <?php 
-                        if ($row > 0) { 
+                    <?php
+                        if ($row > 0) {
                             $sql = "SELECT * FROM registros";
                             $sql = mysqli_query($conn, $sql);
                             $row = mysqli_num_rows($sql);
@@ -102,8 +109,12 @@
                             echo '<table class="table table-striped table-bordered table-hover">';
                             echo  "<th>Nome do livro </th>";
                             echo  "<th> Autor(a) do pedido</th>";
-                            echo "<th>RA do aluno que pediu</th>";
-                            echo "<th>Expedimento (ano,mês,dia)</th>";
+                            echo "<th>RA do aluno</th>";
+                            echo "<th>Ação</th>";
+                            echo "<th>Expedimento (ano, mês, dia)</th>";
+                            if ($admin == true) {
+                              echo "<th>Ação concluída</th>";
+                            }
                             echo  "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -112,11 +123,15 @@
                                 $nome = $linha['nome_aluno'];
                                 $ra = $linha['ra_aluno'];
                                 $data = $linha['data'];
+                                $acao = $linha['acao'];
                                 echo "<tr>";
                                 echo "<td>$nome_livro</td>";
                                 echo "<td>$nome</td>";
                                 echo "<td>$ra</td>";
-                                echo "<td>$data</td>";
+                                echo "<td>$acao</td>";
+                                echo "<td><center>$data</center></td>";
+                                echo "<td><center><button class='btn btn-default'>Apagar</button></center></td>";
+                                echo "";
                                 echo "</tr>";
                             }
                         }else {
@@ -130,23 +145,23 @@
                         ?>
                  <center>
             <div>
-              
-                 <!-- /. ROW  -->           
+
+                 <!-- /. ROW  -->
     </div>
              <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
     <div class="footer">
-      
-    
+
+
              <div class="row">
                 <div class="col-lg-12" >
                     &copy; 2017 José Geraldo Vieira
                 </div>
         </div>
         </div>
-          
+
 
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -156,7 +171,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-    
-   
+
+
 </body>
 </html>
