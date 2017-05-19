@@ -18,6 +18,7 @@ if (isset($_FILES['arquivo'])) {
         if ($ext == '.pdf') {
           $book_name = ucwords(strtolower($_POST['book-name']));
           $author_name = ucwords(strtolower($_POST['author-name']));
+          $genre = $_POST['genre'];
           session_start();
           $ra = $_SESSION['user'];
           $new_name = md5(time()) . $ext;
@@ -36,7 +37,7 @@ if (isset($_FILES['arquivo'])) {
               $d -= 1;
           }
           $now = "$y-$m-$d";
-          $sql_code = "INSERT INTO livros (id, nome_livro, autor_livro, usuario, arquivo, data) VALUES(null, '$book_name', '$author_name', '$ra', '$new_name', '$now')";
+          $sql_code = "INSERT INTO livros (id, nome_livro, autor_livro, genero, usuario, arquivo, data) VALUES(null, '$book_name', '$author_name', '$genre', '$ra', '$new_name', '$now')";
           $sql = mysqli_query($conn, $sql_code);
           $msg = "$book_name enviado com sucesso";
         }   
@@ -144,7 +145,10 @@ if (isset($_FILES['arquivo'])) {
                             <p class="help-block">Iremos utilizar o nome do livro para salvá-lo posteriormente junto com o nome de usuário que o publicou e a data.</p>
                             <label>Nome do autor</label>
                             <input class="form-control" name="author-name" />
-                            <p class="help-block">Utilizaremos o nome do livro e do autor do mesmo para futuras pesquisas, então, peço que preencha.</p>
+                            <p class="help-block">Vamos utilizar esse campo para futuras buscas, preencha-o.</p>
+                            <label>Gênero do livro</label>
+                            <input class="form-control" name="genre" />
+                            <p class="help-block">Utilizaremos o gênero para classificação dos livros, então, peço que preencha o champo de texto acima.</p>
                         </div>
                   <label class="control-label"> Escolha um livro</label><br/>
                   <label for="file-upload" class="btn btn-default">

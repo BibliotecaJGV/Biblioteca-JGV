@@ -132,7 +132,8 @@
                                 echo '<table class="table table-striped table-bordered table-hover">';
                                 echo "<tr>";
                                 echo  "<th>Nome do livro </th>";
-                                echo  "<th> Autor(a) do livro</th>";
+                                echo  "<th>Autor(a) do livro</th>";
+                                echo "<th>Gênero</th>";
                                 echo "<th>RA do aluno que partilhou</th>";
                                 echo  "</tr>";
                                 echo "</thead>";
@@ -142,10 +143,12 @@
                                     $titulo = $linha['nome_livro'];
                                     $autor = $linha['autor_livro'];
                                     $user = $linha['usuario'];
+                                    $gen = $linha['gen'];
                                     $arquivo = $linha['arquivo'];
                                     echo "<tr>";
                                     echo "<td><a href='/uploads/$arquivo'>$titulo</a></td>";
                                     echo "<td>$autor</td>";
+                                    echo "<td>$gen</td>";
                                     echo "<td>$user</td>";
                                     echo "</tr>";
                                 }

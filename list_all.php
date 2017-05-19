@@ -117,7 +117,8 @@
                                 echo "<h4>Livros encontrados</h4>";
                                 echo '<table class="table table-striped table-bordered table-hover">';
                                 echo  "<th>Nome do livro </th>";
-                                echo  "<th> Autor(a) do livro</th>";
+                                echo  "<th>Autor(a) do livro</th>";
+                                echo "<th>Gênero</th>";
                                 echo "<th>RA do aluno que partilhou</th>";
                                 echo  "</tr>";
                                 echo "</thead>";
@@ -126,11 +127,13 @@
                                 while ($linha = mysqli_fetch_array($sql)) {
                                     $titulo = $linha['nome_livro'];
                                     $autor = $linha['autor_livro'];
+                                    $gen = $linha['genero'];
                                     $user = $linha['usuario'];
                                     $arquivo = $linha['arquivo'];
                                     echo "<tr>";
                                     echo "<td><a href='/uploads/$arquivo'>$titulo</a></td>";
                                     echo "<td>$autor</td>";
+                                    echo "<td>$gen</td>";
                                     echo "<td>$user</td>";
                                     echo "</tr>";
                                 }
