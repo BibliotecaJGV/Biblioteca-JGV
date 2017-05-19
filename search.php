@@ -110,7 +110,22 @@
                             <input class="form-control" name="book-name" />
                             <label>Nome do autor</label>
                             <input class="form-control" name="author-name" />
-                            <p class="help-block">Utilizaremos o nome do livro e/ou do autor do mesmo para nossas pesquisas, então, peço que preencha.</p>
+                            <div style="width:30%">
+                            <label>Gênero</label>
+                            <select name="genre" class="form-control">
+                                <option>Selecione uma opção...</option>
+                                <option>Administração e Negócios</option>
+                                <option>Contos e Crônicas</option>
+                                <option>Engenharia e Tecnologia</option>
+                                <option>Ficção Científica</option>
+                                <option>Romance</option>
+                                <option>Literatura Infanto Juvenil</option>
+                                <option>Filosofia</option>
+                                <option>Ciências Humanas e Sociais</option>
+                                <option>Ciências Biológicas</option>
+                                </select>
+                            </div>
+                            <p class="help-block">Utilizaremos o nome do livro, do autor e o gênero do mesmo para nossas pesquisas.</p>
                         </div>
                   <input type="submit" class="btn btn-default" name="pesquisar" value="Pesquisar">
                   </form>
@@ -118,16 +133,14 @@
                       <?php
                             $livro = ucwords($_POST['book-name']);
                             $autor = ucwords($_POST['author-name']);
-
-                            $sql = "SELECT * FROM livros WHERE nome_livro LIKE '$livro' OR autor_livro LIKE '$autor'";
+                            $genre = $_POST['genre'];
+                            $sql = "SELECT * FROM livros WHERE (nome_livro LIKE '$livro') OR (autor_livro LIKE '$autor') OR (genero LIKE '$genre') ORDER BY data DESC";
                             $sql = mysqli_query($conn, $sql);
-                            mysqli_query($conn, "SET NAMES utf8");
-                            mysqli_query($conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
                             $row = mysqli_num_rows($sql);
 
                             $pasta = dirname(getcwd()).'/uploads/';
 
-                            if ((strlen($livro) > 1) or (strlen($autor))) {
+                            if ( (strlen($livro) > 1) or (strlen($autor) > 1) or (strlen($genre) > 1) ) {
                                 echo "<h4>Livro encontrado</h4>";
                                 echo '<table class="table table-striped table-bordered table-hover">';
                                 echo "<tr>";
@@ -135,6 +148,7 @@
                                 echo  "<th>Autor(a) do livro</th>";
                                 echo "<th>Gênero</th>";
                                 echo "<th>RA do aluno que partilhou</th>";
+                                echo "<th>Data de inclusão (ano, mês, dia)</th>";
                                 echo  "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -143,21 +157,26 @@
                                     $titulo = $linha['nome_livro'];
                                     $autor = $linha['autor_livro'];
                                     $user = $linha['usuario'];
-                                    $gen = $linha['gen'];
+                                    $gen = $linha['genero'];
                                     $arquivo = $linha['arquivo'];
+                                    $date = $linha['data'];
                                     echo "<tr>";
                                     echo "<td><a href='/uploads/$arquivo'>$titulo</a></td>";
                                     echo "<td>$autor</td>";
                                     echo "<td>$gen</td>";
-                                    echo "<td>$user</td>";
+                                    echo "<td><center>$user<center/></td>";
+                                    echo "<td><center>$date</center></td>";
                                     echo "</tr>";
                                 }
                             }else {
                                 echo "<div class='alert alert-error'>";
-                                if (strlen($livro) > 1)
-                                  echo "<h4><strong>$livro</strong> não foi achado, desculpe-nos.</h4>";
-                                else {
-                                  echo "<h4>O autor <strong>$autor</strong> não foi achado, desculpe-nos.</h4>";
+                                if (strlen($livro) > 1) {
+                                    echo "<h4><strong>$livro</strong> não foi achado, desculpe-nos.</h4>";
+                                }
+                                else if (strlen($autor) > 1) {
+                                    echo "<h4>O autor <strong>$autor</strong> não foi achado, desculpe-nos.</h4>";
+                                }else if (strlen($genre) > 1) {
+                                    echo "<h4>O gênero <strong>$genre</strong> não resultou em buscas satisfatórias.</h4>";
                                 }
                                 echo "</div>";
                             }

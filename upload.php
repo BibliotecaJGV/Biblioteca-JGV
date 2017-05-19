@@ -146,9 +146,22 @@ if (isset($_FILES['arquivo'])) {
                             <label>Nome do autor</label>
                             <input class="form-control" name="author-name" />
                             <p class="help-block">Vamos utilizar esse campo para futuras buscas, preencha-o.</p>
+                            <div style="width:30%">
                             <label>Gênero do livro</label>
-                            <input class="form-control" name="genre" />
-                            <p class="help-block">Utilizaremos o gênero para classificação dos livros, então, peço que preencha o champo de texto acima.</p>
+                            <select name="genre" class="form-control">
+                                <option>Selecione uma opção...</option>
+                                <option>Administração e Negócios</option>
+                                <option>Contos e Crônicas</option>
+                                <option>Engenharia e Tecnologia</option>
+                                <option>Ficção Científica</option>
+                                <option>Romance</option>
+                                <option>Literatura Infanto Juvenil</option>
+                                <option>Filosofia</option>
+                                <option>Ciências Humanas e Sociais</option>
+                                <option>Ciências Biológicas</option>
+                                </select>
+                            </div>
+                            <p class="help-block">Utilizaremos o gênero para classificação dos livros, então, peço que selecione-o.</p>
                         </div>
                   <label class="control-label"> Escolha um livro</label><br/>
                   <label for="file-upload" class="btn btn-default">
