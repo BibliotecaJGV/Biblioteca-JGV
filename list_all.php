@@ -107,7 +107,7 @@
                             $livro = ucwords($_POST['book-name']);
                             $autor = ucwords($_POST['author-name']);
                             
-                            $sql = "SELECT * FROM livros";
+                            $sql = "SELECT * FROM livros ORDER BY data DESC";
                             $sql = mysqli_query($conn, $sql);
                             $row = mysqli_num_rows($sql);
                             
