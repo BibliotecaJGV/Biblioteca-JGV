@@ -155,7 +155,7 @@
                             $nome_livro = ucwords($_POST['nome_livro']);
                             if (strlen($nome_livro) > 1) {
                                 if ($acao == "Pegar emprestado (com prazo determinado)") {
-                                    $acao = "Empréstimo";
+                                    $acao = "Emprestado";
                                     if ($data == $today) {
                                         echo "<br/>";
                                         echo "<div class='alert alert-warning'>";
@@ -171,7 +171,7 @@
                                       echo "</div>";
                                     }
                                 }else if ($acao == "Doar livro") {
-                                    $acao = "Doação";
+                                    $acao = "Doado";
                                     if ($data == $today) {
                                         echo "<br/>";
                                         echo "<div class='alert alert-warning'>";
@@ -193,15 +193,32 @@
                     }
                   ?>
                  <hr/>
-                 <center>
-            <div>
-                      <div>
-                          <a href="consult.php" >
-                              <center><i class="fa fa-book fa-5x"></i></center>
-                      <h4>Consultar todos os livros emprestados por ora</h4>
-                      </a>
-                      </div>
-            </div></center>
+                    <div>
+                        <div class='col-lg-3 col-md-3 col-sm-3 col-xs-6'>
+                            <div class='div-square'>
+                                <a href="consult.php?pesquisa=todos" >
+                                    <center><i class="fa fa-table fa-5x"></i></center>
+                                    <h4>Todos os registros até agora</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class='col-lg-3 col-md-3 col-sm-3 col-xs-6'>
+                            <div class='div-square'>
+                                    <a href='consult.php?pesquisa=cedidos'>
+                                        <center><i class="fa fa-book fa-5x"></i></center>
+                                        <h4>Livros emprestados até agora</h4>
+                                    </a>
+                            </div>
+                        </div>
+                        <div class='col lg-3 col-md-3 col-sm-3 col-xs-6'>
+                            <div class='div-square'>
+                                <a href='consult.php?pesquisa=doados'>
+                                    <center><i class='fa fa-book fa-5x'></i></center>
+                                    <h4>Livros doados até agora</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
                  <!-- /. ROW  -->
     </div>

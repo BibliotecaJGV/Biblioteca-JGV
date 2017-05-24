@@ -15,6 +15,10 @@
     if ($row > 0) {
         $admin = true;
     }
+    $peq = $_GET['pesquisa'];
+    if (strlen($peq) < 5) {
+        header("Location:real.php");
+    }
 ?>
 
 
@@ -102,7 +106,15 @@
                  <hr/>
                     <?php
                         if ($row > 0) {
-                            $sql = "SELECT * FROM registros";
+                            if ($peq == 'todos') {
+                                $sql = "SELECT * FROM registros ORDER BY data DESC";
+                            }
+                            elseif ($peq == 'doados') {
+                                $sql = "SELECT * FROM registros WHERE acao LIKE 'Doado' ORDER BY data DESC";
+                            }
+                            elseif ($peq == 'cedidos') {
+                                $sql = "SELECT * FROM registros WHERE acao LIKE 'Emprestado' ORDER BY data DESC";
+                            }
                             $sql = mysqli_query($conn, $sql);
                             $row = mysqli_num_rows($sql);
                             echo "<h3>Ações em vigor</h3>";
@@ -112,9 +124,6 @@
                             echo "<th>RA do aluno</th>";
                             echo "<th>Ação</th>";
                             echo "<th>Expedimento (ano, mês, dia)</th>";
-                            if ($admin == true) {
-                              echo "<th>Ação concluída</th>";
-                            }
                             echo  "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -130,8 +139,6 @@
                                 echo "<td>$ra</td>";
                                 echo "<td>$acao</td>";
                                 echo "<td><center>$data</center></td>";
-                                echo "<td><center><button class='btn btn-default'>Apagar</button></center></td>";
-                                echo "";
                                 echo "</tr>";
                             }
                         }else {
