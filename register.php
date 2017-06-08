@@ -1,4 +1,4 @@
-<?php 
+<?php
     $ra = $_POST['user'];
     $name = ucwords(strtolower($_POST['name']));
     $email = $_POST['email'];
@@ -11,21 +11,17 @@
     $pwd = "reni1234";
     $db = "2320610_jgv";
     $conn = new mysqli($host, $user, $pwd, $db);
-	session_start();
-	if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
-		header("Location:login.php");
-	}
     mysqli_query($conn, "SET NAMES utf8");
     mysqli_query($conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
     if (isset($ra)) {
      if (strlen($name) > 1 and strlen($ra) > 1 and str_getcsv($pass) > 1) {
       if ($inst == "jgv" or strpos($inst, "josé geraldo vieira") or strrpos($inst, "jose geraldo vieira") or $inst == "geraldo") {
         $sql = mysqli_query($conn, "INSERT INTO alunos(ra_aluno, nome_aluno, email_aluno, senha) VALUES('$ra', '$name', '$email', '$pass')");
-        header("Location:index.php");   
+        header("Location:index.php");
       }
     }else {
         header("Location:register.php?t=invalid");
-        }   
+        }
     }
 ?>
 
@@ -39,13 +35,13 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-  
+
       <style>
       /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
       body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("http://cdn.wallpapersafari.com/32/30/IuGnQc.jpg") 50% fixed;
+  background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;
   /* background: url(css/bg.jpg); */
   background-size: cover;
 }
