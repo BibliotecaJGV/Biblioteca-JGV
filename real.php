@@ -196,7 +196,7 @@
                     <div>
                         <div class='col-lg-3 col-md-3 col-sm-3 col-xs-6'>
                             <div class='div-square'>
-                                <a href="consult.php?pesquisa=todos" >
+                                <a href="consult.php?type=todos" >
                                     <center><i class="fa fa-table fa-5x"></i></center>
                                     <h4>Todos os registros até agora</h4>
                                 </a>
@@ -204,15 +204,23 @@
                         </div>
                         <div class='col-lg-3 col-md-3 col-sm-3 col-xs-6'>
                             <div class='div-square'>
-                                    <a href='consult.php?pesquisa=cedidos'>
+                                    <a href='consult.php?type=cedidos'>
                                         <center><i class="fa fa-book fa-5x"></i></center>
-                                        <h4>Livros emprestados até agora</h4>
+                                        <h4>Livros emprestados até agora (por alunos)</h4>
+                                    </a>
+                            </div>
+                        </div>
+                        <div class='col-lg-3 col-md-3 col-sm-3 col-xs-6'>
+                            <div class='div-square'>
+                                    <a href='school.php'>
+                                        <center><i class="fa fa-book fa-5x"></i></center>
+                                        <h4>Livros cedidos pela escola</h4>
                                     </a>
                             </div>
                         </div>
                         <div class='col lg-3 col-md-3 col-sm-3 col-xs-6'>
                             <div class='div-square'>
-                                <a href='consult.php?pesquisa=doados'>
+                                <a href='consult.php?type=doados'>
                                     <center><i class='fa fa-book fa-5x'></i></center>
                                     <h4>Livros doados até agora</h4>
                                 </a>

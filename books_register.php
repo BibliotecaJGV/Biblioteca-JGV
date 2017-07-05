@@ -1,4 +1,4 @@
-Warning: Cannot modify header information - headers already sent by (output started at /srv/disk3/2320610/www/bibliotecajgv.atwebpages.com/list_all.php:1) in <?php
+<?php
 $host = "fdb16.runhosting.com";
 $user = "2320610_jgv";
 $pwd = "reni1234";
@@ -9,6 +9,39 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
 	header("Location:login.php");
 }
 $user = $_SESSION['user'];
+
+$nome_livro = ucwords(strtolower($_POST['nome_livro']));
+$autor_livro = ucwords(strtolower($_POST['autor_livro']));
+$edicao = $_POST['edicao'];
+$genero = $_POST['genre'];
+
+if (strlen($edicao) < 1) {
+    $edicao = '1ª';
+}else {
+    if (strpos($edicao, 'ª') !== false) {
+        $edicao = $edicao . 'ª';
+    }
+}
+
+function verify_real($name, $author, $edi, $gen) {
+    if (strlen($name) > 1 and strlen($author) > 1 and strlen($edi) > 1 and strlen($gen) > 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+if (isset($nome_livro)) {
+    if (verify_real($nome_livro, $autor_livro, $edicao, $genero) == true) {
+    $sql = "INSERT INTO escola (id, nome_livro, autor_livro, genero, edicao) VALUES (null, '$nome_livro', '$autor_livro', '$genero', '$edicao')";
+    $sql = mysqli_query($conn, $sql);
+    $msg = "Livro registrado com sucesso";
+    }else {
+        $msg = "Livro não foi registrado. <br/>Cheque os campos novamente.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -112,6 +145,23 @@ $user = $_SESSION['user'];
                   <form action="books_register.php" method="POST">
                     <input class="form-control" name="nome_livro" placeholder="Nome do livro" /><br/>
                     <input class="form-control" name="autor_livro" placeholder="Autor do livro" /><br/>
+                    <input class="form-control" name"edicao" placeholder="Edição do livro"><br/>
+                    <p class="help-block">Se o campo de edição for deixado em branco, será utilizado o valor padrão 1, como de primeira edição.</p>
+                    <div style="width:30%">
+                    <label>Gênero do livro</label>
+                    <select name="genre" class="form-control">
+                        <option>Selecione uma opção...</option>
+                        <option>Administração e Negócios</option>
+                        <option>Contos e Crônicas</option>
+                        <option>Engenharia e Tecnologia</option>
+                        <option>Ficção Científica</option>
+                        <option>Romance</option>
+                        <option>Literatura Infanto Juvenil</option>
+                        <option>Filosofia</option>
+                        <option>Ciências Humanas e Sociais</option>
+                        <option>Ciências Biológicas</option>
+                        </select>
+                    </div>
                     <?php
                     function clock() {
                         $today = getdate();
@@ -128,7 +178,9 @@ $user = $_SESSION['user'];
                         $hour  = date('H');
                         $minutes = date('i');
                         $hour = intval($hour);
-                        $hour -= 3;
+                        if ($hour >= 1) {
+                            $hour += 21;
+                        }
                         $hour = "$hour:$minutes";
                         echo "<center>";
                         echo "<label>Horário atual: $hour</label> - ";
@@ -139,7 +191,23 @@ $user = $_SESSION['user'];
                     ?>
                     <center><input type="submit" value="Registrar livro" class="btn btn-primary" /></center><br/>
                   </form>
-                 <!-- /. ROW  -->           
+                 <!-- /. ROW  --> 
+                 <hr/>
+                 <?php
+                 if ($msg != false and $msg != 'Livro não foi registrado. <br/>Cheque os campos novamente.') {
+                      echo "<div class='alert alert-success'>";
+                      echo "<h3>$msg</h3>";
+                      echo "</div>";
+                    }else {
+                        if ($msg == '') {
+                            
+                        }else {
+                          echo "<div class='alert alert-danger'>";
+                            echo "<h3>$msg</h3>";
+                            echo "</div>";   
+                        }
+                    }
+                 ?>          
     </div>
              <!-- /. PAGE INNER  -->
             </div>

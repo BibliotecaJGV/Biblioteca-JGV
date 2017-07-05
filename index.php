@@ -41,8 +41,7 @@
       body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: "css/bg.jpg" 50% fixed;
-  /* background: url(css/bg.jpg); */
+  background: url("https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Images-Book-Wallpapers-HD.jpg") 50% fixed;
   background-size: cover;
 }
 

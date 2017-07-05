@@ -15,10 +15,8 @@
     mysqli_query($conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
     if (isset($ra)) {
      if (strlen($name) > 1 and strlen($ra) > 1 and str_getcsv($pass) > 1) {
-      if ($inst == "jgv" or strpos($inst, "josé geraldo vieira") or strrpos($inst, "jose geraldo vieira") or $inst == "geraldo") {
         $sql = mysqli_query($conn, "INSERT INTO alunos(ra_aluno, nome_aluno, email_aluno, senha) VALUES('$ra', '$name', '$email', '$pass')");
         header("Location:index.php");
-      }
     }else {
         header("Location:register.php?t=invalid");
         }
@@ -30,6 +28,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
   <title>Biblioteca JGV</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -206,13 +205,11 @@ footer a, footer a:link {
 
 <body>
   <div class="wrapper">
-  <form class="login" action="register.php" method="POST">
+  <form class="login" action="register.php" method="POST" accept-charset="UTF-8">
     <p class="title">Biblioteca JGV</p>
     <input type="text" name="name" placeholder="Nome do aluno" autofocus/>
     <i class="fa fa-user"></i>
     <input type="text" name="user" placeholder="RA do aluno" autofocus/>
-    <i class="fa fa-user"></i>
-    <input type="text" name="inst" placeholder="Instituição de ensino" autofocus/>
     <i class="fa fa-user"></i>
     <input type="text" name="email" placeholder="Email do aluno" autofocus/>
     <i class="fa fa-envelope-square"></i>

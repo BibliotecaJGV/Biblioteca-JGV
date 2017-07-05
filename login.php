@@ -2,6 +2,7 @@
         session_start();
         $ra = $_POST['user'];
         $pass = $_POST['pass'];
+        $stay = $_POST['stay'];
         $host = "fdb16.runhosting.com";
         $user = "2320610_jgv";
         $pwd = "reni1234";

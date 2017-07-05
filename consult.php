@@ -15,7 +15,7 @@
     if ($row > 0) {
         $admin = true;
     }
-    $peq = $_GET['pesquisa'];
+    $peq = $_GET['type'];
     if (strlen($peq) < 5) {
         header("Location:real.php");
     }
@@ -120,7 +120,7 @@
                             echo "<h3>Ações em vigor</h3>";
                             echo '<table class="table table-striped table-bordered table-hover">';
                             echo  "<th>Nome do livro </th>";
-                            echo  "<th> Autor(a) do pedido</th>";
+                            echo  "<th>Autor(a) do pedido</th>";
                             echo "<th>RA do aluno</th>";
                             echo "<th>Ação</th>";
                             echo "<th>Expedimento (ano, mês, dia)</th>";

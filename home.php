@@ -59,7 +59,7 @@ $nome = $sql->nome_aluno;
 
                 </div>
                 <span class="logout-spn" >
-                <?php
+                <?php 
                 $ra = $_SESSION['user'];
                 $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
                 $sql = mysqli_query($conn, $sql);
