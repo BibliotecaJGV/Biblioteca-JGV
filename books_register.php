@@ -9,17 +9,16 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
 	header("Location:login.php");
 }
 $user = $_SESSION['user'];
-
 $nome_livro = ucwords(strtolower($_POST['nome_livro']));
 $autor_livro = ucwords(strtolower($_POST['autor_livro']));
-$edicao = $_POST['edicao'];
+$edi = $_POST['edicao_livro'];
 $genero = $_POST['genre'];
 
-if (strlen($edicao) < 1) {
-    $edicao = '1ª';
+if (strlen($edi) < 1) {
+    $edi = "1ª";
 }else {
-    if (strpos($edicao, 'ª') !== false) {
-        $edicao = $edicao . 'ª';
+    if (strpos($edi, "ª") === false) {
+        $edi = $edi . "ª";
     }
 }
 
@@ -32,11 +31,11 @@ function verify_real($name, $author, $edi, $gen) {
     }
 }
 
-if (isset($nome_livro)) {
-    if (verify_real($nome_livro, $autor_livro, $edicao, $genero) == true) {
-    $sql = "INSERT INTO escola (id, nome_livro, autor_livro, genero, edicao) VALUES (null, '$nome_livro', '$autor_livro', '$genero', '$edicao')";
-    $sql = mysqli_query($conn, $sql);
-    $msg = "Livro registrado com sucesso";
+if (isset($genero)) {
+    if (verify_real($nome_livro, $autor_livro, $edi, $genero) == true) {
+        $sql = "INSERT INTO escola (id, nome_livro, autor_livro, genero, edicao) VALUES (null, '$nome_livro', '$autor_livro', '$genero', '$edi')";
+        $sql = mysqli_query($conn, $sql);
+        $msg = "Livro registrado com sucesso";
     }else {
         $msg = "Livro não foi registrado. <br/>Cheque os campos novamente.";
     }
@@ -145,7 +144,7 @@ if (isset($nome_livro)) {
                   <form action="books_register.php" method="POST">
                     <input class="form-control" name="nome_livro" placeholder="Nome do livro" /><br/>
                     <input class="form-control" name="autor_livro" placeholder="Autor do livro" /><br/>
-                    <input class="form-control" name"edicao" placeholder="Edição do livro"><br/>
+                    <input class="form-control" name="edicao_livro" placeholder="Edição do livro"><br/>
                     <p class="help-block">Se o campo de edição for deixado em branco, será utilizado o valor padrão 1, como de primeira edição.</p>
                     <div style="width:30%">
                     <label>Gênero do livro</label>
