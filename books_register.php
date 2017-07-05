@@ -176,10 +176,7 @@ if (isset($genero)) {
                         $hj ="$d-$m-$y";
                         $hour  = date('H');
                         $minutes = date('i');
-                        $hour = intval($hour);
-                        if ($hour >= 1) {
-                            $hour += 21;
-                        }
+                        $hour = intval($hour) - 3;
                         $hour = "$hour:$minutes";
                         echo "<center>";
                         echo "<label>Horário atual: $hour</label> - ";
