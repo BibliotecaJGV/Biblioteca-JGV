@@ -92,56 +92,43 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <!-- <h2>Notificações </h2>  -->
+                     <!-- <h2>Aceitações </h2>  -->
                     </div>
                 </div>
                  <!-- /. ROW  -->
-                 <h3>Notificações de livros partilhados</h3>
+                 <h3>Livros disponíveis para aceitação no site</h3>
                   <hr />
                         <?php
-                        $hour = date('H');
-                        date_default_timezone_set('UTC');
-                        setlocale(LC_ALL, 'pt_BR');
-                        $today = getdate();
-                        $d = $today['mday'];
-                        $m = $today['mon'];
-                        $y = $today['year'];
-                        // echo "Hora: $hour";
-                        if ($hour >= 0 and $hour < 3) {
-                            $d -= 1;
-                        }
-                        $agora_pc = "$y-$m-$d";
-                        $agora_usuario = "$d-$m-$y";
-                        echo "<div class='alert alert-warning'>";
-                        echo "<h3>Livros de hoje: $agora_usuario</h3>";
-                        echo "</div>";
-                        $sql = "SELECT * FROM livros WHERE data = '$agora_pc'";
-                        $sql = mysqli_query($conn, $sql);
-                        $row = mysqli_num_rows($sql);
-                        if ($row > 0) {
-                            while ($linha = mysqli_fetch_array($sql)) {
-                                $id = $linha['id'];
-                                $titulo = $linha['nome_livro'];
-                                $autor = $linha['autor_livro'];
-                                $usuario = $linha['usuario'];
-                                $arquivo = $linha['arquivo'];
-                                echo '<div class="panel-group" id="accordion">';
-                                echo '<div class="panel panel-default">';
-                                echo '<div class="panel-heading">';
-                                echo '<h4 class="panel-title">';
-                                echo "<a data-toggle='collapse'data-parent='#accordion'" . "href='#collapse$id' class='collapsed'>$titulo</a></h4>";
-                                echo '</div>';
-                                echo "<div id='collapse$id' class='panel-collapse collapse' style='height: 0px;'>";
-                                echo "<div class='panel-body'>
-                                        Autor: $autor. Partilhado por: $usuario.<br/>
-                                            <a href='/uploads/$arquivo'>Clique aqui para acessar o livro</a>
-                                    </div>";
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
-
+                            $sql = "SELECT * FROM pendentes";
+                            $sql = mysqli_query($conn, $sql);
+                            $row = mysqli_num_rows($sql);
+                            if ($row > 0) {
+                                while ($linha = mysqli_fetch_array($sql)) {
+                                    $titulo = $linha['nome_livro'];
+                                    $autor = $linha['autor_livro'];
+                                    $genero = $linha['genero'];
+                                    $usuario = $linha['usuario'];
+                                    $arquivo = $linha['arquivo'];
+                                    $data = $linha['data'];
+                                    $data = date("d/m/Y", strtotime($data));
+                                    echo '<div class="panel-group" id="accordion">';
+                                    echo '<div class="panel panel-default">';
+                                    echo '<div class="panel-heading">';
+                                    echo '<h4 class="panel-title">';
+                                    echo "<a data-toggle='collapse'data-parent='#accordion'" . "href='#collapse$id' class='collapsed'>$titulo</a></h4>";
+                                    echo '</div>';
+                                    echo "<div id='collapse$id' class='panel-collapse collapse' style='height: 0px;'>";
+                                    echo "<div class='panel-body'>
+                                            Autor: $autor.<br />Gênero: $genero. <br /> Partilhado por: $usuario em $data.<br/>
+                                                <a href='/uploads/$arquivo'>Clique aqui para acessar o livro</a><br />
+                                                <button type='button' class='btn btn-success'><a href='#' style='color: rgb(255, 255, 255)'>Aceitar</a></button>
+                                                <button type='button' class='btn btn-danger'><a href='#' style='color: rgb(255, 255, 255)'>Recusar</a></button>
+                                        </div>";
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
                             }
-                        }
                         ?>
                  <!-- /. ROW  -->
     </div>

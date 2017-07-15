@@ -4,12 +4,7 @@
     $name = $_POST['name'];
     $email = $_POST['email'];
     $pass = $_POST['pass'];
-
-    $host = "fdb16.runhosting.com";
-    $user = "2320610_jgv";
-    $pwd = "reni1234";
-    $db = "2320610_jgv";
-    $conn = new mysqli($host, $user, $pwd, $db);
+    include 'connection.php';
 	session_start();
 	if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
 		header("Location:login.php");
@@ -53,6 +48,7 @@
 
                  <span class="logout-spn" >
                       <?php 
+                      
                 $ra = $_SESSION['user'];
                 $sql = "SELECT * FROM alunos WHERE ra_aluno LIKE '$ra'";
                 $sql = mysqli_query($conn, $sql);
@@ -130,10 +126,17 @@
                             echo "<input class='form-control' name='new_ra' placeholder='$ra' autocomplete='new-password'/>";
                             echo '<label>Senha</label>';
                             echo "<input type='password' class='form-control' id='pwd' name='new_pass' placeholder='$senha_final' autocomplete='new-password'/>";
-                            echo '<hr>';
+                            echo '<hr />';
                             echo '<input class="btn btn-success" type="submit" name="submit" value="Registrar mudanças" />';
-                            echo '</hr>';
                             echo '</form>';
+                            echo '<hr />';
+                            echo '<ol>';
+                            echo '<li>Acesse a página <a href="https://signup.wordpress.com/signup/?ref=oauth2&oauth2_redirect=3f17bd2602ad85e2f01b8d3346936a68%40https%3A%2F%2Fpublic-api.wordpress.com%2Foauth2%2Fauthorize%2F%3Fclient_id%3D1854%26response_type%3Dcode%26blog_id%3D0%26state%3D72b7f223cb2067ed8502be0e38aae98497e88be2638325097728ca1f7ffad0af%26redirect_uri%3Dhttps%253A%252F%252Fen.gravatar.com%252Fconnect%252F%253Faction%253Drequest_access_token%26jetpack-code%26jetpack-user-id%3D0%26action%3Doauth2-login&wpcom_connect=1">Gravatar Signup</a></li>';
+                            echo '<li>Coloque os seus dados e clique em Sign up/Registrar-se</li>';
+                            echo '<li>Cheque o email para ver uma confirmação do Gravatar e ative a sua conta (activate your account)</li>';
+                            echo '<li>Clique em Logar no (Sign into) Gravatar na página que abrir</li>';
+                            echo '<li>Agora para adicionar imagem clique em Adicione uma clicando aqui (Adding one by clicking here) e adicione sua imagem</li>';
+                            echo '</ol>';
                         }
                     }
                   ?>

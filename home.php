@@ -1,9 +1,5 @@
 <?php
-$host = "fdb16.runhosting.com";
-$user = "2320610_jgv";
-$pwd = "reni1234";
-$db = "2320610_jgv";
-$conn = new mysqli($host, $user, $pwd, $db);
+include 'connection.php';
 ?>
 <?php
 session_start();
@@ -12,11 +8,7 @@ if (!isset($_SESSION['user']) || (!isset($_SESSION['pass']))) {
 }
 ?>
 <?php
-$host = "fdb16.runhosting.com";
-$user = "2320610_jgv";
-$pwd = "reni1234";
-$db = "2320610_jgv";
-$conn = new mysqli($host, $user, $pwd, $db);
+include 'connection.php';
 $ra = $_SESSION['user'];
 $pass = $_SESSION['pass'];
 $sql = mysqli_query($conn, "SELECT * FROM alunos WHERE ra_aluno = '$ra' AND senha = '$pass'");
@@ -134,11 +126,7 @@ $nome = $sql->nome_aluno;
                         </div>
                         <div class="alert alert-info">
                              <?php
-                             $host = "fdb16.runhosting.com";
-                             $user = "2320610_jgv";
-                             $pwd = "reni1234";
-                             $db = "2320610_jgv";
-                             $conn = new mysqli($host, $user, $pwd, $db);
+                             include 'connection.php';
                              $ra = $_SESSION['user'];
                              $pass = $_SESSION['pass'];
                              $sql = mysqli_query($conn, "SELECT * FROM alunos WHERE ra_aluno = '$ra' AND senha = '$pass'");
@@ -149,20 +137,40 @@ $nome = $sql->nome_aluno;
                              <!-- <strong>Welcome Jhon Doe ! </strong> You Have No pending Task For Today. > -->
                         </div>
                     </div>
-                    </div>
+                </div>
                   <!-- /. ROW  -->
-                            <div class="row text-center pad-top">
+                  <?php
+                    $user = $_SESSION['user'];
+                    $sql = "SELECT * FROM admins WHERE usuario LIKE '$user'";
+                    $sql = mysqli_query($conn, $sql);
+                    $row = mysqli_num_rows($sql);
+                    if ($row > 0) {
+                      echo "
+                      <div class='row text-center pad-top'>
+                                <div class='col-lg-2 col-md-2 col-sm-2 col-xs-6'>
+                      <div class='div-square'>
+                           <a href='pending.php' >
+ <i class='fa fa-lock fa-5x'></i>
+                      <h4>Pendentes</h4>
+                      </a>
+                      </div>";
+                        session_start();
+                    }
+                    ?>
+
+
+                  </div>
                   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
                            <a href="notification.php" >
  <i class="fa fa-bell-o fa-5x"></i>
-                      <h4>Notificações </h4>
+                      <h4>Notificações</h4>
                       </a>
                       </div>
 
 
                   </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
                           <a href="settings.php" >
  <i class="fa fa-gear fa-5x"></i>
@@ -189,7 +197,7 @@ $nome = $sql->nome_aluno;
                     &copy;  2017 José Geraldo Vieira
                 </div>
             </div>
-        </div>
+    </div>
 
 
      <!-- /. WRAPPER  -->

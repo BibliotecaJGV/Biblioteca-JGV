@@ -1,9 +1,5 @@
 <?php
-$host = "fdb16.runhosting.com";
-$user = "2320610_jgv";
-$pwd = "reni1234";
-$db = "2320610_jgv";
-$conn = new mysqli($host, $user, $pwd, $db);
+include 'connection.php';
 session_start();
 if (!isset($_SESSION['user']) || !isset($_SESSION['pass'])) {
 	header("Location:login.php");
@@ -24,9 +20,7 @@ if (isset($_FILES['arquivo'])) {
           $new_name = md5(time()) . $ext;
           $direc = "home/www/bibliotecajgv.atwebpages.com/uploads/";
           chdir('/');
-          echo "Dir atual: " . getcwd();
           $arquivo = $_FILES['arquivo']['tmp_name'];
-          echo 'Diretorio do arquivo: '.$arquivo;
           move_uploaded_file($arquivo, $direc.$new_name);
           $hour = date('H');
           $today = getdate();
@@ -37,7 +31,7 @@ if (isset($_FILES['arquivo'])) {
               $d -= 1;
           }
           $now = "$y-$m-$d";
-          $sql_code = "INSERT INTO livros (id, nome_livro, autor_livro, genero, usuario, arquivo, data) VALUES(null, '$book_name', '$author_name', '$genre', '$ra', '$new_name', '$now')";
+          $sql_code = "INSERT INTO pendentes (id, nome_livro, autor_livro, genero, usuario, arquivo, data) VALUES(null, '$book_name', '$author_name', '$genre', '$ra', '$new_name', '$now')";
           $sql = mysqli_query($conn, $sql_code);
           $msg = "$book_name enviado com sucesso";
         }   
