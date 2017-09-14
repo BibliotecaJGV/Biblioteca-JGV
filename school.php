@@ -95,7 +95,17 @@
         <div id="page-wrapper" >
             <div id="page-inner">
             <h3>Biblioteca física - Consulta a livros da escola</h3>
-                 <hr/>
+                <hr/>
+                <form method="POST"  action="school-search.php" enctype="multipart/form-data" style="position: relative">
+                    <div class="form-group">
+                        <div style="width: 89%">
+                            <input class="form-control" name="campo-pesquisa" style="width: 100%;" />
+                        </div>
+                        <input class="btn btn-default" name="pesquisar" value="Pesquisar"
+                                style="width: 100px; position: absolute; top: 0; right: 0;"/>
+                    </div>
+                </form>
+                <hr/>
                     <?php
                         if ($row > 0) {
                             $sql = "SELECT * FROM escola";
@@ -107,7 +117,6 @@
                             echo  "<th>Autor(a) do livro</th>";
                             echo "<th>Gênero</th>";
                             echo "<th>Edição</th>";
-                            // echo "<th>Data (ano, mês, dia)</th>";
                             echo  "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -116,13 +125,11 @@
                                 $autor_livro = $linha['autor_livro'];
                                 $genero = $linha['genero'];
                                 $edicao = $linha['edicao'];
-                                // $data = $linha['data'];
                                 echo "<tr>";
                                 echo "<td>$nome_livro</td>";
                                 echo "<td>$autor_livro</td>";
                                 echo "<td>$genero</td>";
                                 echo "<td>$edicao</td>";
-                                // echo "<td><center>$data</center></td>";
                                 echo "</tr>";
                             }
                         }else {
